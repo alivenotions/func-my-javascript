@@ -27,5 +27,37 @@ head([1, 2, 3, 4]) // 1
 // the underlying object
 
 const fiveNaturalNum = Object.freeze([1, 2, 3, 4, 5])
-fiveNaturalNum.push(6) // ​​Cannot add property 5, object is not extensible​​
+// fiveNaturalNum.push(6) // ​​Cannot add property 5, object is not extensible​​
 
+/** Classes */
+
+class PointClass {
+    constructor(x, y) {
+        this.x = x
+        this.y = y
+    }
+
+    moveBy(dx, dy) {
+        this.x += dx
+        this.y += dy
+    }
+}
+
+// is equivalent to
+
+function Point(x, y) {
+    this.x = x
+    this.y = y
+}
+
+Point.prototype.moveBy = function(dx, dy) {
+    this.x += dx
+    this.y += dy
+}
+
+// this above approach mutates state a lot.
+// the approach below with pure functions
+const createPoint = (x, y) => Object.freeze([x, y])
+
+const movePointBy = ([x, y], dx, dy) => 
+                                Object.freeze([x + dx, y + dy])
