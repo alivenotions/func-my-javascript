@@ -64,7 +64,7 @@ function truncateString(str, num) {
     return str.slice(0, num - 3) + '...'
 }
 
-// ToDo: functionalize the logic
+// TODO: functionalize the logic
 function chunkArrayInGroups(arr, size) {
     let chunkedArray = []
     let subArray = []
@@ -101,6 +101,25 @@ function destroyer(arr, ...destroy) {
     return arr.filter(element => !isInArray(element, destroy))
 }
 
+function getIndexToIns(arr, num) {
+    // arr.sort((a,b) => a > b)
+    // for(const elem of arr) {
+    //     if(num <= elem) return arr.indexOf(elem)
+    // }
+    // return arr.length
+
+    // functional way
+    const insertIndex = arr.slice()
+                    .sort((curr, next) => curr > next)
+                    .findIndex(element => num <= element)
+    return insertIndex === -1 ? arr.length : insertIndex
+}
+
+function rot13(str) {
+    return str.replace(/[A-Z]/g, L => 
+                            String.fromCharCode((L.charCodeAt(0) % 26) + 65))
+}
+
 // checking the solutions
 
 // console.log(palindrome('A man, a plan, a canal. Panama'))
@@ -115,4 +134,6 @@ function destroyer(arr, ...destroy) {
 // console.log(slasher([1, 2, 3], 5))
 // console.log(mutation(['floor', 'for']))
 // console.log(bouncer([7, 'ate', '', false, 9]))
-console.log(destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3))
+// console.log(destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3))
+// console.log(getIndexToIns([10, 20, 30, 40, 50], 30))
+// console.log(rot13('SERR PBQR PNZC'))
