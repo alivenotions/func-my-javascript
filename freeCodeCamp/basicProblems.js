@@ -16,6 +16,8 @@ const uniqueStr = sortedStr => sortedStr.replace(/(.)(?=.*\1)/g, '')
 const isInArray = (value, arr) => arr.indexOf(value) > -1
 
 // solutions to problems
+// the function names correspond the names at freeCodeCamp, hence, are poor
+
 function palindrome(str) {
     const bareStringify = compose(stripNonAlphanumerics, lowerCase)
     return bareStringify(str) === bareStringify(reverse(str))
@@ -46,6 +48,7 @@ function largestInSubArrays(arr) {
     }, [])
 }
 
+// str should end with target
 function confirmEnding(str, target) {
     // return str.endsWith(target)
     // return !!str.match(new RegExp(target + '$'))
@@ -58,18 +61,22 @@ function repeatStringNumTimes(str, num) {
     return str.repeat(num)
 }
 
-function truncateString(str, num) {
-    if(num >= str.length) return str
-    else if(num <= 3) return str.slice(0, num) + '...'
-    return str.slice(0, num - 3) + '...'
+// truncate str with length and add '...'
+// '...' is counted as the str.length
+// if length <=3, '...' isn't counted as str.length
+function truncateString(str, length) {
+    if(length >= str.length) return str
+    else if(length <= 3) return str.slice(0, length) + '...'
+    return str.slice(0, length - 3) + '...'
 }
 
+// create chunks in the form of subarrays
 // TODO: functionalize the logic
-function chunkArrayInGroups(arr, size) {
+function chunkArrayInGroups(arr, chunkSize) {
     let chunkedArray = []
     let subArray = []
     for(let count = 0, num = 0; num < arr.length; num++) {
-        if(count === 0 || count === size) {
+        if(count === 0 || count === chunkSize) {
             subArray = []
             chunkedArray.push(subArray)
             count = 0
@@ -80,10 +87,12 @@ function chunkArrayInGroups(arr, size) {
     return chunkedArray
 }
 
+// delete values from array beginning
 function slasher(arr, howMany) {
     return arr.slice(howMany)
 }
 
+// all letters in second should be in first
 function mutation([first, second]) {
     return second.toLowerCase()
         .split('')
@@ -91,10 +100,12 @@ function mutation([first, second]) {
             .indexOf(letter) !== -1)
 }
 
+// only truth values should remain in the arr
 function bouncer(arr) {
     return arr.filter(element => !!element)
 }
 
+// remove elements passed after arr from arr
 function destroyer(arr, ...destroy) {
     // return arr.filter(element => !destroy.includes(element))
     // ES5 way: use indexOf
@@ -115,6 +126,7 @@ function getIndexToIns(arr, num) {
     return insertIndex === -1 ? arr.length : insertIndex
 }
 
+// caesar cipher variant rot13-encoding decoder
 function rot13(str) {
     return str.replace(/[A-Z]/g, L => 
                             String.fromCharCode((L.charCodeAt(0) % 26) + 65))
