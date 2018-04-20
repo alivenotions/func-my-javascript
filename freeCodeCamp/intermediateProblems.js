@@ -7,6 +7,8 @@
 // utility functions
 const titleCaseWord = word => word.charAt(0).toUpperCase() + word.slice(1)
 const leadingConsonants = word => word.match(/^[^aeiou]+/) || ''
+const isOdd = num => num % 2 !== 0
+const isNum = num => Number.isInteger(num)
 
 // solutions to problems.
 // the function names correspond the names at freeCodeCamp, hence, are poor
@@ -95,9 +97,71 @@ function pairElement(str) {
             }, [])
 }
 
+function uniteUnique(...arr) {
+    return arr.reduce((union, subArr) => 
+            union.concat(subArr.filter(element =>
+                !union.includes(element))))
+}
+  
+
 // return true only and only if bool is a boolean
 function booWho(bool) {
     return typeof bool === 'boolean'
+}
+
+
+function spinalCase(str) {
+    // return str.split(/\s|_|(?=[A-Z])/).join('-').toLowerCase()
+    return str.replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/\s+|_+/g, '-')
+        .toLowerCase()
+}
+
+// an abstraction func for sumFibs below
+const fibonacciTill = num => {
+    const listOfFibs = [1, 1]
+    ;[first, second] = listOfFibs
+    let sum = 1
+    while(true) {
+        sum = first + second
+        if((sum) > num) break
+        listOfFibs.push(sum)
+        first = second
+        second = sum
+    }
+    return listOfFibs
+}
+
+// sum all odd fibonacci number under num
+function sumFibs(num) {
+    return fibonacciTill(num)
+        .filter(element => isOdd(element))
+        .reduce((a, b) => a + b, 0)
+}
+
+// find the first element that satisfies func
+function findElement(arr, func) {
+    // return arr.filter(func).shift()
+    return arr.find(func)
+}
+
+// flatten the list
+function steamrollArray(arr) {
+    const flatten = [].concat(...arr)
+    return flatten.some(Array.isArray) ? steamrollArray(flatten) : flatten
+}
+
+// check if pre exists on every object of collection
+function truthCheck(collection, pre) {
+    return collection.every(object => !!object[pre])
+}
+
+function addTogether(...args) {
+    if(!isNum(args[0]) || (args.length === 2 && !isNum(args[1]))) return
+    return args.length === 2
+        ? args[0] + args[1]
+        : (num) => 
+            isNum(num) ? num + args[0] : undefined
 }
 
 // checking the solutions
@@ -111,6 +175,18 @@ function booWho(bool) {
 //     { 'b': 2}
 // ], { 'a': 1, 'b': 2 }))
 // console.log(myReplace('A quick brown fox Jumped over the lazy dog', 'Jumped', 'leaped'))
-// console.log(translatePigLatin('falgorithm'))
 // console.log(pairElement('GCGT'))
+// console.log(translatePigLatin('falgorithm'))
 // console.log(booWho([]))
+// console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+// console.log(spinalCase('ThisIs_Spinal Tap'))
+// console.log(sumFibs(1000))
+// console.log(findElement([1, 2, 3, 4], function(num){ return num % 2 === 0 }))
+// console.log(steamrollArray([1, {}, [3, [[4]]]]))
+// console.log(truthCheck([
+//     {"user": "Tinky-Winky", "sex": "male"},
+//     {"user": "Dipsy"},
+//     {"user": "Laa-Laa", "sex": "female"},
+//     {"user": "Po", "sex": "female"}],
+// "sex"))
+// console.log(addTogether(2, 3))
