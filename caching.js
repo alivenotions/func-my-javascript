@@ -1,3 +1,4 @@
+// memoize :: ((...a) -> a) -> a
 const memoize = f => {
     const cache = {}
 

@@ -1,4 +1,6 @@
+// toUpperCase :: String -> String
 const toUpperCase = string => string.toUpperCase()
+// reverse :: String -> String
 const reverse = string => string.split('').reverse().join('')
 
 // reduce version
