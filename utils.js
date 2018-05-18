@@ -1,6 +1,7 @@
 const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
 const concat = addendum => str => str.concat(addendum)
 const match = regex => str => str.match(regex)
+const prop = key => object => object[key]
 
 // inspect :: a -> String
 function inspect(x) {
@@ -32,4 +33,10 @@ function inspect(x) {
     return (typeof x === 'function') ? inspectFn(x) : inspectArgs(x);
 }
 
-module.exports = { compose, concat, match, inspect }
+module.exports = {
+    compose,
+    concat,
+    match,
+    inspect,
+    prop,
+}
