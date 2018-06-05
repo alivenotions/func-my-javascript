@@ -1,5 +1,5 @@
 const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
-const concat = addendum => str => str.concat(addendum)
+const concat = str => addendum => str.concat(addendum)
 const match = regex => str => str.match(regex)
 const prop = key => object => object[key]
 const add = x => y => x + y
