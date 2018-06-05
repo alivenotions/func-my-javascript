@@ -5,6 +5,7 @@ const {
   inspect,
   prop,
   curry,
+  map,
 } = require('./utils')
 
 /** Maybe functor */
@@ -30,10 +31,6 @@ class Maybe {
       return this.isNothing ? 'Nothing' : `Just(${inspect(this.$value)})`
   }
 }
-
-// a point-free map
-// map :: Functor f => (a -> b) -> f a -> f b
-const map = f => anyFunctor => anyFunctor.map(f)
 
 // console.log(Maybe.of('This is the end'))
 // console.log(Maybe.of(null).map(match(/a/ig)))

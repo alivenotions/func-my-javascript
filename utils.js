@@ -2,6 +2,10 @@ const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
 const concat = addendum => str => str.concat(addendum)
 const match = regex => str => str.match(regex)
 const prop = key => object => object[key]
+const add = x => y => x + y
+
+// map :: Functor f => (a -> b) -> f a -> f b
+const map = f => anyFunctor => anyFunctor.map(f)
 
 // curry :: ((a, b, ...) -> c) -> a -> b -> ... -> c
 const curry = (fn) => {
@@ -53,4 +57,6 @@ module.exports = {
     inspect,
     prop,
     curry,
+    add,
+    map,
 }
