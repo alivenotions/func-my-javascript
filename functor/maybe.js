@@ -6,7 +6,7 @@ const {
   prop,
   curry,
   map,
-} = require('./utils')
+} = require('../utils')
 
 /** Maybe functor */
 // a simplified implementation

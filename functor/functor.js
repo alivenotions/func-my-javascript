@@ -4,7 +4,7 @@ const {
     concat,
     inspect,
     prop
- } = require('./utils')
+ } = require('../utils')
 
 // a functor follows this rule
 // fx.map(f).map(g) == fx.map(x => g(f(x)))

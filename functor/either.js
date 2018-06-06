@@ -5,7 +5,7 @@ const {
   add,
   map,
   concat,
-} = require('./utils')
+} = require('../utils')
 
 class Either {
   static of(x) {
