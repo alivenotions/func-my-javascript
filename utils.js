@@ -4,6 +4,9 @@ const match = regex => str => str.match(regex)
 const prop = key => object => object[key]
 const add = x => y => x + y
 
+// id :: a -> a
+const id = x => x
+
 // map :: Functor f => (a -> b) -> f a -> f b
 const map = f => anyFunctor => anyFunctor.map(f)
 
@@ -51,6 +54,7 @@ function inspect(x) {
 }
 
 module.exports = {
+    id,
     compose,
     concat,
     match,

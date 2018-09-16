@@ -5,6 +5,7 @@ const {
   add,
   map,
   concat,
+  id,
 } = require('../utils')
 
 class Either {
@@ -65,10 +66,35 @@ const fortune = compose(
 )
 
 // zoltar :: User -> Either(String, _)
-const zoltar = compose(
-  map(console.log),
-  map(fortune),
-  getAge(new Date().getFullYear()),
+// const zoltar = compose(
+//   map(console.log),
+//   map(fortune),
+//   getAge(new Date().getFullYear()),
+// )
+
+// console.log(zoltar({ birthDate: '2017' }))
+
+// either :: (a -> c) -> (b -> c) -> Either a b -> c
+const either = curry((f, g, e) => {
+  let result
+
+  switch (e.constructor) {
+    case Left:
+      result = f(e.$value)
+      break
+
+    case Right:
+      result = g(e.$value)
+      break
+  }
+
+  return result
+})
+
+ const zoltar = compose(
+   console.log,
+   either(id, fortune),
+   getAge(new Date().getFullYear())
 )
 
-console.log(zoltar({ birthDate: 'balloons' }))
+zoltar({ birthDate: '1995' })
