@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/alivenotions/func-my-javascript#readme",
   "dependencies": {
+    "fluture": "^10.1.0",
     "folktale": "^2.3.0"
   }
 }
