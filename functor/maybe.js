@@ -81,5 +81,9 @@ const maybe = curry ((v, f, m) => {
 // getTwenty :: Account -> String
 const getTwenty = compose(maybe(`You're broke`, finishTransaction), withdraw(20))
 
-console.log(getTwenty({ balance: 200 }))
-console.log(getTwenty({ balance: 15 }))
+// console.log(getTwenty({ balance: 200 }))
+// console.log(getTwenty({ balance: 15 }))
+
+module.exports = {
+  Maybe,
+}

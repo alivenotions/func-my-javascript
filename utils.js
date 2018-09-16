@@ -3,12 +3,14 @@ const concat = str => addendum => str.concat(addendum)
 const match = regex => str => str.match(regex)
 const prop = key => object => object[key]
 const add = x => y => x + y
+const head = ([first, ..._]) => first
+const last = arr => !!(arr.length > 0) ? arr[arr.length - 1] : []
+const filter = fn => arr => arr.filter(fn)
+const eq = a => b => a === b
+const split = separator => string => string.split(separator)
 
 // id :: a -> a
 const id = x => x
-
-// map :: Functor f => (a -> b) -> f a -> f b
-const map = f => anyFunctor => anyFunctor.map(f)
 
 // curry :: ((a, b, ...) -> c) -> a -> b -> ... -> c
 const curry = (fn) => {
@@ -20,8 +22,11 @@ const curry = (fn) => {
         }
 
         return fn.call(null, ...args);
-    };
-};
+    }
+}
+
+// map :: Functor f => (a -> b) -> f a -> f b
+const map = curry((f, anyFunctor) => anyFunctor.map(f))
 
 // inspect :: a -> String
 function inspect(x) {
@@ -55,6 +60,7 @@ function inspect(x) {
 
 module.exports = {
     id,
+    eq,
     compose,
     concat,
     match,
@@ -63,4 +69,8 @@ module.exports = {
     curry,
     add,
     map,
+    last,
+    filter,
+    head,
+    split,
 }
