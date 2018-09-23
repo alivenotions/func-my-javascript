@@ -27,6 +27,10 @@ class Maybe {
       return this.isNothing ? this : Maybe.of(fn(this.$value))
   }
 
+  join() {
+    return this.isNothing ? Maybe.of(null) : this.$value
+  }
+
   inspect() {
       return this.isNothing ? 'Nothing' : `Just(${inspect(this.$value)})`
   }
